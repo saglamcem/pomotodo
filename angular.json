@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pomotodo"
+    }
+  },
+  "defaultProject": "pomotodo",
+  "cli": {
+    "analytics": "9a771999-1702-429e-8fcb-301b76549cb0"
+  }
 }
