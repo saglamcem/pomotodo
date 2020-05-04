@@ -21,5 +21,6 @@ describe('TimerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component).not.toBeFalsy();
   });
 });
