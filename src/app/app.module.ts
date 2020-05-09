@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TimerComponent } from './components/timer/timer.component';
+import { RegularTimerComponent } from './components/regular-timer/regular-timer.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { MaterialModule } from "./shared/material/material.module";
+import { RegularTimerContainerComponent } from './components/regular-timer-container/regular-timer-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TimerComponent,
+    RegularTimerContainerComponent,
+    RegularTimerComponent,
     TodoComponent
   ],
   imports: [
