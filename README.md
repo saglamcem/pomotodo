@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/saglamcem/pomotodo.svg?style=shield&circle-token=cc7b11ccd3b389ed67d4c9d29f50cf53a49cc570)](https://circleci.com/gh/saglamcem/workflows/pomotodo)
+
 # Pomotodo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
