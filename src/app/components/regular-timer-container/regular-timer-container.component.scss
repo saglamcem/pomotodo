@@ -1,0 +1,15 @@
+@import '~src/styles/colors';
+
+.regular-timer-container {
+  display: flex;
+  justify-content: center;
+
+  height: 50%;
+  width: 100%;
+
+  background-color: $pomo-red;
+
+  &.is-rest-time {
+    background-color: $pomo-green;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="regular-timer-container" [ngClass]="{'is-rest-time' : TimerState.isCountingBreakTime(currentState)}">
+  <pomo-regular-timer
+    [seconds]="remainingSeconds"
+    [informationText]="informationText"
+    [state]="currentState"
+    (startClock)="handleStartClock()"
+    (stopClock)="handleStopClock()"
+    (pauseClock)="handlePauseClock()"
+    (resumeClock)="handleResumeClock()"
+    (skipClock)="handleSkipRest()"
+    (done)="handleDoneClicked()">
+  </pomo-regular-timer>
+</div>
+
+<p>Remaining seconds: {{ remainingSeconds }}</p>
+<p>State: {{ TimerState.getStateLabel(currentState) }}</p>
+<p>Done counter: {{ doneCounter }}</p>
