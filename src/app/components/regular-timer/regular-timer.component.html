@@ -1,0 +1,54 @@
+<div
+  *ngIf="seconds !== undefined && state !== undefined"
+  class="timer-container">
+  <p class="count">
+    {{ countdownText }}
+  </p>
+
+  <div class="buttons">
+    <div
+      *ngIf="TimerState.isWaitingToStart(state)"
+      class="button button-start">
+      <button mat-raised-button (click)="onStartClicked()">Start</button>
+    </div>
+
+    <div
+      *ngIf="TimerState.isCounting(state) || TimerState.isCountingBreakTime(state)"
+      class="button button-pause">
+      <button mat-raised-button (click)="onPauseClicked()">Pause</button>
+    </div>
+
+    <div
+      *ngIf="TimerState.isWaitingToStart(state) || TimerState.isCounting(state)"
+      class="button button-stop">
+      <button
+        mat-raised-button
+        [disabled]="TimerState.isWaitingToStart(state)"
+        (click)="onStopClicked()">
+        Stop
+      </button>
+    </div>
+
+    <div
+      *ngIf="TimerState.isPaused(state)"
+      class="button button-resume">
+      <button mat-raised-button (click)="onResumeClicked()">Resume</button>
+    </div>
+
+    <div
+      *ngIf="TimerState.isPaused(state)"
+      class="button button-done">
+      <button mat-raised-button (click)="onDoneClicked()">Done</button>
+    </div>
+
+    <div
+      *ngIf="TimerState.isCountingBreakTime(state)"
+      class="button button-skip">
+      <button mat-raised-button (click)="onSkipClicked()">Skip</button>
+    </div>
+  </div>
+
+  <div class="information-text" *ngIf="informationText">
+    Info text: {{ informationText }}
+  </div>
+</div>
