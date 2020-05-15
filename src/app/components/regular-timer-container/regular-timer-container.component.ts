@@ -15,6 +15,7 @@ import { mapTo, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
 export class RegularTimerContainerComponent implements OnInit, OnDestroy {
   informationText: string = null;
   currentState: RegularTimerStateEnum = RegularTimerStateEnum.WAITING_TO_START;
+  TimerState = RegularTimerState;
 
   startCounter$: Subject<any> = new Subject<any>();
   stopCounter$: Subject<any> = new Subject<any>();
@@ -23,9 +24,7 @@ export class RegularTimerContainerComponent implements OnInit, OnDestroy {
 
   doneCounter = 0;
 
-  TimerState = RegularTimerState;
-
-  myCountdownSubscription: Subscription;
+  countdownSubscription: Subscription;
   secondsCountdown$ = timer(0, 1000)
     .pipe(
       tap(val => {
@@ -74,10 +73,7 @@ export class RegularTimerContainerComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit() {
-    this.myCountdownSubscription = this.myCountdown$.subscribe(val =>
-      // console.log(`Subscribe block: ${val}`)
-      val
-    );
+    this.countdownSubscription = this.myCountdown$.subscribe();
   }
 
   handleStartClock() {
@@ -145,6 +141,6 @@ export class RegularTimerContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.myCountdownSubscription.unsubscribe();
+    this.countdownSubscription.unsubscribe();
   }
 }

@@ -1,4 +1,7 @@
-<div class="regular-timer-container" [ngClass]="{'is-rest-time' : TimerState.isCountingBreakTime(currentState)}">
+<div
+  *ngIf="remainingSeconds !== undefined && currentState !== undefined"
+  class="regular-timer-container"
+  [ngClass]="{'is-rest-time' : TimerState.isCountingBreakTime(currentState)}">
   <pomo-regular-timer
     [seconds]="remainingSeconds"
     [informationText]="informationText"
