@@ -35,6 +35,14 @@ import {MatBottomSheetModule} from "@angular/material/bottom-sheet";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatDividerModule} from "@angular/material/divider";
 
+import {ClipboardModule} from '@angular/cdk/clipboard';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {PortalModule} from '@angular/cdk/portal';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTreeModule} from '@angular/cdk/tree';
+
 const materialModules = [
   MatAutocompleteModule,
   MatBadgeModule,
@@ -70,7 +78,14 @@ const materialModules = [
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule
+  MatTreeModule,
+  ClipboardModule,
+  DragDropModule,
+  PortalModule,
+  ScrollingModule,
+  CdkStepperModule,
+  CdkTableModule,
+  CdkTreeModule
 ];
 
 @NgModule({

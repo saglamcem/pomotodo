@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegularTimerComponent } from './components/regular-timer/regular-timer.component';
-import { TodoComponent } from './components/todo/todo.component';
+import { TodoContainerComponent } from './components/todo-container/todo-container.component';
 import { MaterialModule } from "./shared/material/material.module";
 import { RegularTimerContainerComponent } from './components/regular-timer-container/regular-timer-container.component';
 
@@ -13,7 +13,7 @@ import { RegularTimerContainerComponent } from './components/regular-timer-conta
     AppComponent,
     RegularTimerContainerComponent,
     RegularTimerComponent,
-    TodoComponent
+    TodoContainerComponent
   ],
   imports: [
     BrowserModule,
