@@ -1,13 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoContainerComponent } from './todo-container.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
-describe('TodoComponent', () => {
+describe('TodoContainerComponent', () => {
   let component: TodoContainerComponent;
   let fixture: ComponentFixture<TodoContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        DragDropModule
+      ],
       declarations: [ TodoContainerComponent ]
     })
     .compileComponents();
@@ -16,6 +20,7 @@ describe('TodoComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TodoContainerComponent);
     component = fixture.componentInstance;
+    component.ngOnInit();
     fixture.detectChanges();
   });
 

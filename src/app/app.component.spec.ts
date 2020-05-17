@@ -2,15 +2,21 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RegularTimerContainerComponent } from './components/regular-timer-container/regular-timer-container.component';
 import { RegularTimerComponent } from './components/regular-timer/regular-timer.component';
+import { TodoContainerComponent } from './components/todo-container/todo-container.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        DragDropModule
+      ],
       declarations: [
         AppComponent,
         RegularTimerContainerComponent,
-        RegularTimerComponent
-      ],
+        RegularTimerComponent,
+        TodoContainerComponent
+      ]
     }).compileComponents();
   }));
 
