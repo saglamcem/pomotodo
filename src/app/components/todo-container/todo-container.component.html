@@ -8,6 +8,7 @@
       [cdkDropListData]="column.taskList"
       [cdkDropListConnectedTo]="column.cdkConnectedTo"
       class="column-task-list"
+      [ngClass]="{'is-empty': column?.taskList?.length === 0}"
       (cdkDropListDropped)="drop($event)"
     >
       <ng-container *ngIf="column.taskList.length > 0">
@@ -21,7 +22,7 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="!column.taskList || column.taskList.length === 0">
+      <ng-container *ngIf="column?.taskList?.length === 0">
         <div class="column-task-item no-pointer-events">No items here</div>
       </ng-container>
     </div>
