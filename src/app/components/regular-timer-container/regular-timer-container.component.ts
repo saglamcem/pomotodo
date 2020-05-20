@@ -4,8 +4,9 @@ import {
   RegularTimerState,
   RegularTimerStateEnum
 } from '../../shared/util/regular/regular-timer-state';
-import { EMPTY, merge, Subject, Subscription, timer } from 'rxjs';
-import { mapTo, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
   selector: 'pomo-regular-timer-container',
@@ -13,131 +14,55 @@ import { mapTo, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
   styleUrls: ['./regular-timer-container.component.scss']
 })
 export class RegularTimerContainerComponent implements OnInit, OnDestroy {
-  informationText: string = null;
-  currentState: RegularTimerStateEnum = RegularTimerStateEnum.WAITING_TO_START;
   TimerState = RegularTimerState;
 
-  startCounter$: Subject<any> = new Subject<any>();
-  stopCounter$: Subject<any> = new Subject<any>();
-
-  remainingSeconds: number = RegularTimerSeconds.WORK_TIME;
-
-  doneCounter = 0;
-
   countdownSubscription: Subscription;
-  secondsCountdown$ = timer(0, 1000)
-    .pipe(
-      tap(val => {
-        if (!RegularTimerState.isWaitingToStart(this.currentState)) {
-          this.remainingSeconds--;
-        }
 
-        if (this.remainingSeconds === 0) {
-          if (RegularTimerState.isCounting(this.currentState)) {
-            this.doneCounter++;
-            this.informationText = 'Take a break, and relax';
-            this.setTimer(this.getBreakTimer());
-            this.setState(RegularTimerStateEnum.COUNTING_BREAK_TIME);
-          }
-          else if (RegularTimerState.isCountingBreakTime(this.currentState)) {
-            this.informationText = 'Back to work!';
-            this.setTimer(RegularTimerSeconds.WORK_TIME);
-            this.setState(RegularTimerStateEnum.WAITING_TO_START);
-          }
-        }
-      }),
-      takeWhile(() =>
-        RegularTimerState.isCounting(this.currentState) ||
-        RegularTimerState.isCountingBreakTime(this.currentState)
-      )
-    );
+  constructor(public timer: TimerService) {}
 
-  doCount$ = this.startCounter$.pipe(
-    tap(() => console.log('startCounter$')),
-    mapTo(true)
-  );
-
-  dontCount$ = this.stopCounter$.pipe(
-    tap(() => console.log('stopCounter$')),
-    mapTo(false)
-  );
-
-  shouldCount$ = merge(this.doCount$, this.dontCount$).pipe(
-    startWith(false)
-  );
-
-  myCountdown$ = this.shouldCount$.pipe(
-    switchMap(shouldCount => shouldCount ? this.secondsCountdown$ : EMPTY)
-  );
-
-  constructor() {}
+  currentState$ = this.timer.state$.pipe(tap(state => console.log(`currentState$: ${state}`)));
+  remainingSeconds$ = this.timer.seconds$.pipe(tap(seconds => console.log(`remainingSeconds$: ${seconds}`)));
+  doneCounter$ = this.timer.doneCounter$.pipe(tap(counter => console.log(`doneCounter$: ${counter}`)));
+  informationText$ = this.timer.informationText$.pipe(tap(informationText => console.log(`informationText$: ${informationText}`)));
 
   ngOnInit() {
-    this.countdownSubscription = this.myCountdown$.subscribe();
+    this.countdownSubscription = this.timer.countdownEvent$.subscribe(val => console.log(val));
   }
 
   handleStartClock() {
-    this.informationText = null;
-    this.setState(RegularTimerStateEnum.COUNTING);
-    this.startCounter$.next();
+    this.timer.setInformationText(null);
+    this.timer.setState(RegularTimerStateEnum.COUNTING);
+    this.timer.startClock();
   }
 
   handleStopClock() {
-    this.informationText = 'Stopped. Continue?';
-    this.setState(RegularTimerStateEnum.WAITING_TO_START);
-    this.setTimer(RegularTimerSeconds.WORK_TIME);
-    this.stopCounter$.next();
+    this.timer.setInformationText('Stopped. Continue?');
+    this.timer.setState(RegularTimerStateEnum.WAITING_TO_START);
+    this.timer.setTimer(RegularTimerSeconds.WORK_TIME);
+    this.timer.stopClock();
   }
 
   handlePauseClock() {
-    this.informationText = 'Paused';
-    this.setState(RegularTimerStateEnum.PAUSED);
-    this.stopCounter$.next();
+    this.timer.setInformationText('Paused');
+    this.timer.setState(RegularTimerStateEnum.PAUSED);
+    this.timer.stopClock();
   }
 
   handleResumeClock() {
-    this.informationText = 'Resuming';
-    this.setState(RegularTimerStateEnum.COUNTING);
-    this.startCounter$.next();
+    this.timer.setInformationText('Resuming');
+    this.timer.setState(RegularTimerStateEnum.COUNTING);
+    this.timer.startClock();
   }
 
   handleSkipRest() {
-    this.setTimer(RegularTimerSeconds.WORK_TIME);
-
-    this.setState(RegularTimerStateEnum.WAITING_TO_START);
+    this.timer.setTimer(RegularTimerSeconds.WORK_TIME);
+    this.timer.setState(RegularTimerStateEnum.WAITING_TO_START);
   }
 
   handleDoneClicked() {
-    this.handleWorkDone();
-    this.informationText = 'Done';
-
-    this.setState(RegularTimerStateEnum.COUNTING_BREAK_TIME);
-
-    this.startCounter$.next();
-  }
-
-  setTimer(value: number) {
-    this.remainingSeconds = value;
-  }
-
-  setState(state: number) {
-    this.currentState = state;
-  }
-
-  private handleWorkDone() {
-    this.doneCounter++;
-    this.setTimer(this.getBreakTimer());
-  }
-
-  private getBreakTimer(): number {
-    const shouldSetLongBreak: boolean = (
-      this.doneCounter !== 0 &&
-      this.doneCounter % 4 === 0
-    );
-
-    return shouldSetLongBreak
-      ? RegularTimerSeconds.LONG_BREAK_TIME
-      : RegularTimerSeconds.SHORT_BREAK_TIME;
+    this.timer.handleWorkDone();
+    this.timer.setInformationText('Done');
+    this.timer.startClock();
   }
 
   ngOnDestroy() {

@@ -1,20 +1,27 @@
-<div
-  *ngIf="remainingSeconds !== undefined && currentState !== undefined"
-  class="regular-timer-container"
-  [ngClass]="{'is-rest-time' : TimerState.isCountingBreakTime(currentState)}">
-  <pomo-regular-timer
-    [seconds]="remainingSeconds"
-    [informationText]="informationText"
-    [state]="currentState"
-    (startClock)="handleStartClock()"
-    (stopClock)="handleStopClock()"
-    (pauseClock)="handlePauseClock()"
-    (resumeClock)="handleResumeClock()"
-    (skipClock)="handleSkipRest()"
-    (done)="handleDoneClicked()">
-  </pomo-regular-timer>
-</div>
+<ng-container *ngIf="{
+  remainingSeconds: remainingSeconds$ | async,
+  currentState: currentState$ | async,
+  informationText: informationText$ | async,
+  doneCounter: doneCounter$ | async
+} as data">
+  <div
+    *ngIf="data.remainingSeconds !== undefined && data.currentState !== undefined"
+    class="regular-timer-container"
+    [ngClass]="{'is-rest-time' : TimerState.isCountingBreakTime(data.currentState)}">
+    <pomo-regular-timer
+      [seconds]="data.remainingSeconds"
+      [informationText]="data.informationText"
+      [state]="data.currentState"
+      (startClock)="handleStartClock()"
+      (stopClock)="handleStopClock()"
+      (pauseClock)="handlePauseClock()"
+      (resumeClock)="handleResumeClock()"
+      (skipClock)="handleSkipRest()"
+      (done)="handleDoneClicked()">
+    </pomo-regular-timer>
+  </div>
 
-<p>Remaining seconds: {{ remainingSeconds }}</p>
-<p>State: {{ TimerState.getStateLabel(currentState) }}</p>
-<p>Done counter: {{ doneCounter }}</p>
+  <p>Remaining seconds: {{ data.remainingSeconds }}</p>
+  <p>State: {{ TimerState.getStateLabel(data.currentState) }}</p>
+  <p>Done counter: {{ data.doneCounter }}</p>
+</ng-container>
