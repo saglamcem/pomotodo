@@ -33,10 +33,6 @@ export class TimerService {
   private secondsCountdown$ = timer(0, 1000)
     .pipe(
       tap(val => {
-        if (!RegularTimerState.isWaitingToStart(this.currentState)) {
-          this.setTimer(--this.remainingSeconds);
-        }
-
         if (this.remainingSeconds === 0) {
           if (RegularTimerState.isCounting(this.currentState)) {
             // this.doneCounter++;
@@ -50,6 +46,10 @@ export class TimerService {
             this.setTimer(RegularTimerSeconds.WORK_TIME);
             this.setState(RegularTimerStateEnum.WAITING_TO_START);
           }
+        }
+
+        if (!RegularTimerState.isWaitingToStart(this.currentState)) {
+          this.setTimer(--this.remainingSeconds);
         }
       }),
       takeWhile(() =>

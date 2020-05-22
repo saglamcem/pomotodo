@@ -6,6 +6,7 @@ import { RegularTimerStateEnum } from '../../shared/util/regular/regular-timer-s
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { TimerService } from '../../services/timer/timer.service';
+import { skip, tap } from 'rxjs/operators';
 
 describe('RegularTimerContainerComponent', () => {
   let component: RegularTimerContainerComponent;
@@ -42,38 +43,45 @@ describe('RegularTimerContainerComponent', () => {
   });
 
   it(`shouldn't render the timer component if the seconds value is unset`, async(() => {
-    const serviceNextSpy = spyOn(timerService['_seconds'], 'next');
+    component.remainingSeconds$
+      .pipe(
+        skip(1)
+      )
+      .subscribe(
+        seconds => {
+          expect(seconds).toEqual(undefined);
+
+          fixture.detectChanges();
+
+          const timerContainerDom: DebugElement = fixture.debugElement;
+          const regularTimerComponent = timerContainerDom.query(By.directive(RegularTimerComponent));
+
+          expect(regularTimerComponent).toBeFalsy();
+        }
+      );
+
     timerService.setTimer(undefined);
-    expect(serviceNextSpy).toHaveBeenCalled();
-
-    component.remainingSeconds$.toPromise()
-      .then(val => {
-        expect(val).toBeTruthy()
-
-        fixture.detectChanges();
-
-        const timerContainerDom: DebugElement = fixture.debugElement;
-        const regularTimerComponent = timerContainerDom.query(By.directive(RegularTimerComponent));
-
-        expect(regularTimerComponent).toBeFalsy();
-      })
-      .catch(err => {
-        console.error(err);
-      });
   }));
 
   it(`shouldn't render the timer component if the state value is unset`, async(() => {
-    const nextSpy = spyOn(timerService['_state'], 'next');
+    component.currentState$
+      .pipe(
+        skip(1)
+      )
+      .subscribe(
+        state => {
+          expect(state).toEqual(undefined);
+
+          fixture.detectChanges();
+
+          const timerContainerDom: DebugElement = fixture.debugElement;
+          const regularTimerComponent = timerContainerDom.query(By.directive(RegularTimerComponent));
+
+          expect(regularTimerComponent).toBeFalsy();
+        }
+      );
+
     timerService.setState(undefined);
-    expect(nextSpy).toHaveBeenCalled();
-    expect(component.currentState$).toHaveBeenCalled();
-
-    fixture.detectChanges();
-
-    const timerContainerDom: DebugElement = fixture.debugElement;
-    const regularTimerComponent = timerContainerDom.query(By.directive(RegularTimerComponent));
-
-    expect(regularTimerComponent).toBeFalsy();
   }));
 
   // it('should have the right class if current state is "counting break time"', () => {
@@ -106,3 +114,4 @@ describe('RegularTimerContainerComponent', () => {
   //   expect(containerElm.classList).toContain('is-rest-time');
   // }));
 });
+
