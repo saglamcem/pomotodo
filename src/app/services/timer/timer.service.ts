@@ -4,7 +4,7 @@ import {
   RegularTimerState,
   RegularTimerStateEnum
 } from '../../shared/util/regular/regular-timer-state';
-import { BehaviorSubject, EMPTY, merge, Observable, of, Subject, timer } from 'rxjs';
+import { BehaviorSubject, EMPTY, merge, Observable, Subject, timer } from 'rxjs';
 import { mapTo, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -35,7 +35,6 @@ export class TimerService {
       tap(val => {
         if (this.remainingSeconds === 0) {
           if (RegularTimerState.isCounting(this.currentState)) {
-            // this.doneCounter++;
             this.setDoneCounter(++this.doneCounter);
             this.setInformationText('Take a break, and relax');
             this.setTimer(this.getBreakTimer());

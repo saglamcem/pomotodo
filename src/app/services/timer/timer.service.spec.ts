@@ -32,6 +32,30 @@ describe('TimerService', () => {
     expect(service.currentState).toEqual(stoppedState);
   });
 
+  it('should emit state value correctly', () => {
+    const nextSpy = spyOn(service['_state'], 'next');
+    service.setState(RegularTimerStateEnum.COUNTING_BREAK_TIME);
+    expect(nextSpy).toHaveBeenCalled();
+  });
+
+  it('should emit seconds value correctly', () => {
+    const nextSpy = spyOn(service['_seconds'], 'next');
+    service.setTimer(RegularTimerSeconds.WORK_TIME);
+    expect(nextSpy).toHaveBeenCalled();
+  });
+
+  it('should emit done counter value correctly', () => {
+    const nextSpy = spyOn(service['_doneCounter'], 'next');
+    service.setDoneCounter(1);
+    expect(nextSpy).toHaveBeenCalled();
+  });
+
+  it('should emit information text value correctly', () => {
+    const nextSpy = spyOn(service['_informationText'], 'next');
+    service.setInformationText('Information text to emit');
+    expect(nextSpy).toHaveBeenCalled();
+  });
+
   it('should know when to give a long/short break', () => {
     let doneCounterMock = 3;
     service.setDoneCounter(doneCounterMock);

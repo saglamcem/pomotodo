@@ -84,34 +84,15 @@ describe('RegularTimerContainerComponent', () => {
     timerService.setState(undefined);
   }));
 
-  // it('should have the right class if current state is "counting break time"', () => {
-  //   const nextSpy = spyOn(timerService['_state'], 'next');
-  //   timerService.setState(RegularTimerStateEnum.COUNTING_BREAK_TIME);
-  //   expect(nextSpy).toHaveBeenCalled();
-  //
-  //   fixture.detectChanges();
-  //
-  //   const timerContainerDom: HTMLElement = fixture.debugElement.nativeElement;
-  //   const containerElm = timerContainerDom.querySelector('.regular-timer-container');
-  //   expect(containerElm.classList).toContain('is-rest-time');
-  // });
-  //
-  // it('should have the right class if current state is "counting break time"', fakeAsync(() => {
-  //   const nextSpy = spyOn(timerService['_state'], 'next');
-  //   timerService.setState(RegularTimerStateEnum.COUNTING_BREAK_TIME);
-  //   expect(nextSpy).toHaveBeenCalled();
-  //
-  //   fixture.detectChanges(); // onInit()
-  //   // sync spy errors immediately after init
-  //
-  //   tick(1000); // flush the component's setTimeout()
-  //
-  //   fixture.detectChanges(); // update errorMessage within setTimeout()
-  //
-  //   const timerContainerDom: HTMLElement = fixture.debugElement.nativeElement;
-  //   const containerElm = timerContainerDom.querySelector('.regular-timer-container');
-  //
-  //   expect(containerElm.classList).toContain('is-rest-time');
-  // }));
+  it('should have the right class if current state is "counting break time"', () => {
+    component.ngOnInit();
+    timerService.setState(RegularTimerStateEnum.COUNTING_BREAK_TIME);
+
+    fixture.detectChanges();
+
+    const timerContainerDom: HTMLElement = fixture.debugElement.nativeElement;
+    const containerElm = timerContainerDom.querySelector('.regular-timer-container');
+    expect(containerElm?.classList?.toString()).toContain('is-rest-time');
+  });
 });
 
