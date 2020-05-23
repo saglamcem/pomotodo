@@ -7,6 +7,9 @@ import {
 import { BehaviorSubject, EMPTY, merge, Observable, Subject, timer } from 'rxjs';
 import { mapTo, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
 
+import { Title } from '@angular/platform-browser';
+import { toMinutesAndSecondsFormat } from '../../shared/util/string-utils';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -50,6 +53,10 @@ export class TimerService {
         if (!RegularTimerState.isWaitingToStart(this.currentState)) {
           this.setTimer(--this.remainingSeconds);
         }
+
+        this.titleService.setTitle(
+          `${toMinutesAndSecondsFormat(this.remainingSeconds)}: ${RegularTimerState.getStateLabel(this.currentState)}`
+        );
       }),
       takeWhile(() =>
         RegularTimerState.isCounting(this.currentState) ||
@@ -75,7 +82,7 @@ export class TimerService {
     switchMap(shouldCount => shouldCount ? this.secondsCountdown$ : EMPTY)
   );
 
-  constructor() {}
+  constructor(private titleService: Title) {}
 
   setState(state: RegularTimerStateEnum) {
     this.currentState = state;
