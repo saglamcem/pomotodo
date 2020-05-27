@@ -15,7 +15,7 @@
         <div
           *ngFor="let item of column.taskList"
           class="column-task-item"
-          [ngClass]="{'is-finished' : item.finished}"
+          [ngClass]="{'is-finished' : column.id === Constants.DONE.id}"
           cdkDrag
         >
           {{item.label}}

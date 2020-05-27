@@ -7,17 +7,17 @@ export enum RegularTimerStateEnum {
 }
 
 // TODO: UNCOMMENT WHEN RELEASING
-// export const RegularTimerSeconds = {
-//   WORK_TIME: 25 * 60,
-//   SHORT_BREAK_TIME: 5 * 60,
-//   LONG_BREAK_TIME: 15 * 60
-// }
-
 export const RegularTimerSeconds = {
-  WORK_TIME: 8,
-  SHORT_BREAK_TIME: 4,
-  LONG_BREAK_TIME: 6
+  WORK_TIME: 25 * 60,
+  SHORT_BREAK_TIME: 5 * 60,
+  LONG_BREAK_TIME: 15 * 60
 }
+
+// export const RegularTimerSeconds = {
+//   WORK_TIME: 8,
+//   SHORT_BREAK_TIME: 4,
+//   LONG_BREAK_TIME: 6
+// }
 
 export class RegularTimerState {
   private state: RegularTimerStateEnum;

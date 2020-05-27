@@ -12,6 +12,8 @@ import Constants from '../../shared/constants';
 export class TodoContainerComponent implements OnInit {
   taskColumns: TaskListColumn[];
 
+  Constants = Constants;
+
   constructor() {}
 
   ngOnInit(): void {
