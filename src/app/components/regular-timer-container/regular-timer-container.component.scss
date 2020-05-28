@@ -4,12 +4,17 @@
   display: flex;
   justify-content: center;
 
-  height: 50%;
+  height: 100%;
   width: 100%;
 
   background-color: $pomo-red;
 
   &.is-rest-time {
     background-color: $pomo-green;
+  }
+
+  .timer-container {
+    padding: 5% 35%;
+    width: 100%;
   }
 }

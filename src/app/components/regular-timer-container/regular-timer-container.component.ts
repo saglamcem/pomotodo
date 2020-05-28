@@ -30,26 +30,22 @@ export class RegularTimerContainerComponent implements OnInit, OnDestroy {
   }
 
   handleStartClock() {
-    this.timer.setInformationText(null);
     this.timer.setState(RegularTimerStateEnum.COUNTING);
     this.timer.startClock();
   }
 
   handleStopClock() {
-    this.timer.setInformationText('Stopped. Continue?');
     this.timer.setState(RegularTimerStateEnum.WAITING_TO_START);
     this.timer.setTimer(RegularTimerSeconds.WORK_TIME);
     this.timer.stopClock();
   }
 
   handlePauseClock() {
-    this.timer.setInformationText('Paused');
     this.timer.setState(RegularTimerStateEnum.PAUSED);
     this.timer.stopClock();
   }
 
   handleResumeClock() {
-    this.timer.setInformationText('Resuming');
     this.timer.setState(RegularTimerStateEnum.COUNTING);
     this.timer.startClock();
   }
@@ -61,7 +57,6 @@ export class RegularTimerContainerComponent implements OnInit, OnDestroy {
 
   handleDoneClicked() {
     this.timer.handleWorkDone();
-    this.timer.setInformationText('Done');
     this.timer.startClock();
   }
 

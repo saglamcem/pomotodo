@@ -5,7 +5,7 @@
 ## Goal 
 Playing around with Angular concepts, whilst seeking to learn best practices 
 
-## To do
+## To implement
 
 ### - Styling - 
 * Drag and drop should be more elegant: 
@@ -37,3 +37,8 @@ Playing around with Angular concepts, whilst seeking to learn best practices
 #### -- Future Versions -- 
 * Tutorial
     * Step by step "How to use" guide to show users how the application works 
+
+## Bugs to fix 
+* State transition
+    * Start -> pause -> done (now in counting state)
+    * If we click pause now,  the PAUSED state shows a red background and we can see DONE (instead of SKIP) 

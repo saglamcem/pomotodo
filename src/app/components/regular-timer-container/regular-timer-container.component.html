@@ -9,6 +9,7 @@
     class="regular-timer-container"
     [ngClass]="{'is-rest-time' : TimerState.isCountingBreakTime(data.currentState)}">
     <pomo-regular-timer
+      class="timer-container"
       [seconds]="data.remainingSeconds"
       [informationText]="data.informationText"
       [state]="data.currentState"
