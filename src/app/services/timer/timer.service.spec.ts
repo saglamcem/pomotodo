@@ -1,7 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { TimerService } from './timer.service';
-import { RegularTimerSeconds, RegularTimerStateEnum } from '../../shared/util/regular/regular-timer-state';
+import {
+  RegularTimerSeconds,
+  RegularTimerStateEnum
+} from '../../shared/util/regular/regular-timer-state';
 
 describe('TimerService', () => {
   let service: TimerService;
@@ -79,4 +82,12 @@ describe('TimerService', () => {
 
     expect(service['getBreakTimer']()).toEqual(RegularTimerSeconds.LONG_BREAK_TIME);
   });
+
+  /*
+    TODO:
+
+    Add tests for
+    handlePauseState()
+    handleResumeState()
+  */
 });

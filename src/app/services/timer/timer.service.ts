@@ -112,6 +112,24 @@ export class TimerService {
     this.stopCounter$.next();
   }
 
+  handlePauseState() {
+    if (RegularTimerState.isCounting(this.currentState)) {
+      this.setState(RegularTimerStateEnum.PAUSED);
+    }
+    else if (RegularTimerState.isCountingBreakTime(this.currentState)) {
+      this.setState(RegularTimerStateEnum.PAUSED_IN_BREAK_TIME);
+    }
+  }
+
+  handleResumeState() {
+    if (RegularTimerState.isPaused(this.currentState)) {
+      this.setState(RegularTimerStateEnum.COUNTING);
+    }
+    else if (RegularTimerState.isPausedInBreakTime(this.currentState)) {
+      this.setState(RegularTimerStateEnum.COUNTING_BREAK_TIME);
+    }
+  }
+
   handleWorkDone() {
     this.setDoneCounter(++this.doneCounter);
     this.setTimer(this.getBreakTimer());

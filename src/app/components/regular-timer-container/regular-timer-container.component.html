@@ -7,7 +7,7 @@
   <div
     *ngIf="data.remainingSeconds !== undefined && data.currentState !== undefined"
     class="regular-timer-container"
-    [ngClass]="{'is-rest-time' : TimerState.isCountingBreakTime(data.currentState)}">
+    [ngClass]="{'is-rest-time' : TimerState.isCountingBreakTime(data.currentState) || TimerState.isPausedInBreakTime(data.currentState)}">
     <pomo-regular-timer
       class="timer-container"
       [seconds]="data.remainingSeconds"

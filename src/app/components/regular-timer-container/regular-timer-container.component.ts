@@ -41,12 +41,12 @@ export class RegularTimerContainerComponent implements OnInit, OnDestroy {
   }
 
   handlePauseClock() {
-    this.timer.setState(RegularTimerStateEnum.PAUSED);
+    this.timer.handlePauseState();
     this.timer.stopClock();
   }
 
   handleResumeClock() {
-    this.timer.setState(RegularTimerStateEnum.COUNTING);
+    this.timer.handleResumeState();
     this.timer.startClock();
   }
 

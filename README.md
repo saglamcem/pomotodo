@@ -39,6 +39,6 @@ Playing around with Angular concepts, whilst seeking to learn best practices
     * Step by step "How to use" guide to show users how the application works 
 
 ## Bugs to fix 
-* State transition
+* [FIXED] #1 - State transition
     * Start -> pause -> done (now in counting state)
-    * If we click pause now,  the PAUSED state shows a red background and we can see DONE (instead of SKIP) 
+    * If we click pause now, the PAUSED state shows a red background, and we can see DONE (instead of SKIP) 

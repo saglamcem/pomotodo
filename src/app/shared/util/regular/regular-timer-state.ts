@@ -3,6 +3,7 @@ export enum RegularTimerStateEnum {
   COUNTING,
   COUNTING_BREAK_TIME,
   PAUSED,
+  PAUSED_IN_BREAK_TIME,
   STOPPED,
 }
 
@@ -37,6 +38,10 @@ export class RegularTimerState {
 
   static isPaused(state: number) {
     return state === RegularTimerStateEnum.PAUSED;
+  }
+
+  static isPausedInBreakTime(state: number) {
+    return state === RegularTimerStateEnum.PAUSED_IN_BREAK_TIME;
   }
 
   static isStopped(state: number) {
