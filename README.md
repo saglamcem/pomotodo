@@ -21,8 +21,13 @@ Playing around with Angular concepts, whilst seeking to learn best practices
 ### - Features -
 
 #### -- Priorities --
+* Todo list management 
+    * Flow
+    * Styling 
+
 * Language support 
     * i18n with transloco 
+    * [See here](https://ngneat.github.io/transloco/)
 
 * Timer recovery 
     * Remember where the counter was and continue from there in case of refresh 

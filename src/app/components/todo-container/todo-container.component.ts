@@ -67,8 +67,6 @@ export class TodoContainerComponent implements OnInit {
   ];
 
   drop(event: CdkDragDrop<TodoItem[]>) {
-    console.log(event.item);
-
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
