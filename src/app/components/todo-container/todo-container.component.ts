@@ -49,21 +49,21 @@ export class TodoContainerComponent implements OnInit {
   }
 
   todo: TodoItem[] = [
-    {label: 'Get to work', finished: false},
-    {label: 'Pick up groceries', finished: false},
-    {label: 'Go home', finished: false}
+    {label: 'Get to work',  atIteration: 1, finished: false},
+    {label: 'Pick up groceries',  atIteration: 1, finished: false},
+    {label: 'Go home', atIteration: 1, finished: false}
   ];
 
   currentFocus: TodoItem[] = [
-    {label: 'Fall asleep', finished: false}
+    {label: 'Fall asleep', atIteration: 1, finished: false}
   ];
 
   done: TodoItem[] = [
-    {label: 'Get up', finished: true},
-    {label: 'Brush teeth', finished: true},
-    {label: 'Take a shower', finished: true},
-    {label: 'Check e-mail', finished: true},
-    {label: 'Walk dog', finished: true}
+    {label: 'Get up', atIteration: 1, finished: true},
+    {label: 'Brush teeth', atIteration: 1, finished: true},
+    {label: 'Take a shower', atIteration: 1, finished: true},
+    {label: 'Check e-mail', atIteration: 1, finished: true},
+    {label: 'Walk dog', atIteration: 1, finished: true}
   ];
 
   drop(event: CdkDragDrop<TodoItem[]>) {

@@ -7,13 +7,17 @@ import { RegularTimerComponent } from './components/regular-timer/regular-timer.
 import { TodoContainerComponent } from './components/todo-container/todo-container.component';
 import { MaterialModule } from "./shared/material/material.module";
 import { RegularTimerContainerComponent } from './components/regular-timer-container/regular-timer-container.component';
+import { TodoViewComponent } from './components/todo-view/todo-view.component';
+import { TodoItemComponent } from './components/todo-item/todo-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegularTimerContainerComponent,
     RegularTimerComponent,
-    TodoContainerComponent
+    TodoContainerComponent,
+    TodoViewComponent,
+    TodoItemComponent
   ],
   imports: [
     BrowserModule,

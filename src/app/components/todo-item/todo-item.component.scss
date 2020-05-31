@@ -1,0 +1,40 @@
+.todo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  .left {
+    display: flex;
+    align-items: center;
+    width: 70%;
+
+    .circle {
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
+      border-radius: 50%;
+      font-size: 18px;
+      color: #fff;
+      line-height: 30px;
+      text-align: center;
+      background: red;
+    }
+
+    .content {
+      margin-left: 20px;
+
+      .title {
+        font-size: 16px;
+      }
+
+      .description {
+        display: block;
+        margin-top: 5px;
+        font-family: 'Montserrat', "Helvetica Neue", sans-serif;
+        color: #555;
+      }
+    }
+  }
+}

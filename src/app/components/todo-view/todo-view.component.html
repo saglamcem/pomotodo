@@ -1,0 +1,31 @@
+<mat-tab-group
+  class="todo-view-tab-group"
+  animationDuration="0ms">
+  <mat-tab label="To do">
+    <div cdkDropList (cdkDropListDropped)="handleDropForTodoItems($event)">
+      <div *ngFor="let todoItem of todoItems" cdkDrag>
+        <mat-card>
+          <pomo-todo-item [data]="todoItem"></pomo-todo-item>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Current focus">
+    <div cdkDropList (cdkDropListDropped)="handleDropForFocusItems($event)">
+      <div *ngFor="let focusItem of currentFocusItems" cdkDrag>
+        <mat-card>
+          <pomo-todo-item [data]="focusItem"></pomo-todo-item>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Done">
+    <div cdkDropList (cdkDropListDropped)="handleDropForDoneItems($event)">
+      <div *ngFor="let doneItem of doneItems" cdkDrag>
+        <mat-card>
+          <pomo-todo-item [data]="doneItem"></pomo-todo-item>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
