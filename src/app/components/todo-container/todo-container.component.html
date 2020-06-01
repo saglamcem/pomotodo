@@ -1,30 +1,66 @@
-<ng-container *ngIf="taskColumns">
-  <div *ngFor="let column of taskColumns" class="column-container">
-    <h2>{{column.columnTitle}}</h2>
+<mat-tab-group
+  class="todo-view-tab-group"
+  animationDuration="0ms">
+  <mat-tab label="Focus">
+    <ng-container *ngTemplateOutlet="focusPanel"></ng-container>
+  </mat-tab>
+  <mat-tab label="Done">
+    <div cdkDropList (cdkDropListDropped)="handleDropForDoneItems($event)">
+      <div *ngFor="let doneItem of doneItems" cdkDrag>
+        <mat-card>
+          <pomo-todo-item [data]="doneItem"></pomo-todo-item>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
 
-    <div
-      cdkDropList
-      [id]="column.id"
-      [cdkDropListData]="column.taskList"
-      [cdkDropListConnectedTo]="column.cdkConnectedTo"
-      class="column-task-list"
-      [ngClass]="{'is-empty': column?.taskList?.length === 0}"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <ng-container *ngIf="column?.taskList?.length > 0">
-        <div
-          *ngFor="let item of column.taskList"
-          class="column-task-item"
-          [ngClass]="{'is-finished' : column.id === Constants.DONE.id}"
-          cdkDrag
-        >
-          {{item.label}}
-        </div>
-      </ng-container>
+<ng-template #focusPanel>
+  <div class="focus-container">
+    <div class="column-container">
+      <h2 class="column-title">To do</h2>
 
-      <ng-container *ngIf="column?.taskList?.length === 0">
-        <div class="column-task-item no-pointer-events">No items here</div>
-      </ng-container>
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="todoItems"
+        [cdkDropListConnectedTo]="[currentFocusList]"
+        class="item-list"
+        (cdkDropListDropped)="drop($event)">
+        <ng-container *ngIf="todoItems?.length > 0; else emptyListTemplate">
+          <div *ngFor="let todoItem of todoItems" cdkDrag>
+            <mat-card>
+              <pomo-todo-item [data]="todoItem"></pomo-todo-item>
+            </mat-card>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="column-container">
+      <h2 class="column-title">Current focus</h2>
+
+      <div
+        cdkDropList
+        #currentFocusList="cdkDropList"
+        [cdkDropListData]="currentFocusItems"
+        [cdkDropListConnectedTo]="[todoList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <ng-container *ngIf="currentFocusItems?.length > 0; else emptyListTemplate">
+          <div *ngFor="let focusItem of currentFocusItems" cdkDrag>
+            <mat-card>
+              <pomo-todo-item [data]="focusItem"></pomo-todo-item>
+            </mat-card>
+          </div>
+        </ng-container>
+      </div>
     </div>
   </div>
-</ng-container>
+</ng-template>
+
+<ng-template #emptyListTemplate>
+  <mat-card>
+    <div class="column-task-item no-pointer-events">This list is empty!</div>
+  </mat-card>
+</ng-template>

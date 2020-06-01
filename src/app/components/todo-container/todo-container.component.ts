@@ -1,64 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TodoItem } from '../../shared/model/todo-item.model';
-import { TaskListColumn } from '../../shared/model/task-list-column.model';
-import Constants from '../../shared/constants';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'pomo-todo-container',
   templateUrl: './todo-container.component.html',
-  styleUrls: ['./todo-container.component.scss']
+  styleUrls: ['./todo-container.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TodoContainerComponent implements OnInit {
-  taskColumns: TaskListColumn[];
-
-  Constants = Constants;
-
-  constructor() {}
-
-  ngOnInit(): void {
-    this.taskColumns = [
-      {
-        cdkConnectedTo: [
-          Constants.CURRENT_FOCUS.id,
-          Constants.DONE.id
-        ],
-        columnTitle: Constants.TODO.columnTitle,
-        id: Constants.TODO.id,
-        taskList: this.todo
-      },
-      {
-        cdkConnectedTo: [
-          Constants.TODO.id,
-          Constants.DONE.id
-        ],
-        columnTitle: Constants.CURRENT_FOCUS.columnTitle,
-        id: Constants.CURRENT_FOCUS.id,
-        taskList: this.currentFocus
-      },
-      {
-        cdkConnectedTo: [
-          Constants.TODO.id,
-          Constants.CURRENT_FOCUS.id
-        ],
-        columnTitle: Constants.DONE.columnTitle,
-        id: Constants.DONE.id,
-        taskList: this.done
-      }
-    ];
-  }
-
-  todo: TodoItem[] = [
-    {label: 'Get to work',  atIteration: 1, finished: false},
-    {label: 'Pick up groceries',  atIteration: 1, finished: false},
-    {label: 'Go home', atIteration: 1, finished: false}
+  todoItems: TodoItem[] = [
+    { label: 'Get to work', atIteration: 1, finished: false },
+    {
+      label: 'Pick up groceries',
+      description: 'No chocolate! No chocolate! No chocolate! No chocolate! No chocolate! No chocolate! No chocolate! No chocolate! No chocolate!',
+      atIteration: 1,
+      finished: false
+    },
+    { label: 'Go home', atIteration: 1, finished: false },
+    { label: 'Work on finishing Pomotodo app', atIteration: 2, finished: false },
+    { label: 'Test 1', atIteration: 3, finished: false },
+    { label: 'Test 2', atIteration: 3, finished: false },
+    { label: 'Test 3', atIteration: 3, finished: false }
   ];
 
-  currentFocus: TodoItem[] = [
+  currentFocusItems: TodoItem[] = [
     {label: 'Fall asleep', atIteration: 1, finished: false}
   ];
 
-  done: TodoItem[] = [
+  doneItems: TodoItem[] = [
     {label: 'Get up', atIteration: 1, finished: true},
     {label: 'Brush teeth', atIteration: 1, finished: true},
     {label: 'Take a shower', atIteration: 1, finished: true},
@@ -66,7 +36,12 @@ export class TodoContainerComponent implements OnInit {
     {label: 'Walk dog', atIteration: 1, finished: true}
   ];
 
+  constructor() {}
+
+  ngOnInit(): void {}
+
   drop(event: CdkDragDrop<TodoItem[]>) {
+    console.log(event.item.element.nativeElement.innerText);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
@@ -78,5 +53,9 @@ export class TodoContainerComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  handleDropForDoneItems(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.doneItems, event.previousIndex, event.currentIndex);
   }
 }

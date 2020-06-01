@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoItemComponent } from './todo-item.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 describe('TodoItemComponent', () => {
   let component: TodoItemComponent;
@@ -8,6 +9,7 @@ describe('TodoItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ MatCheckboxModule ],
       declarations: [ TodoItemComponent ]
     })
     .compileComponents();

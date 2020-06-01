@@ -3,19 +3,23 @@ import { AppComponent } from './app.component';
 import { RegularTimerContainerComponent } from './components/regular-timer-container/regular-timer-container.component';
 import { RegularTimerComponent } from './components/regular-timer/regular-timer.component';
 import { TodoContainerComponent } from './components/todo-container/todo-container.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MaterialModule } from './shared/material/material.module';
+import { TodoItemComponent } from './components/todo-item/todo-item.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        DragDropModule
+        BrowserAnimationsModule,
+        MaterialModule
       ],
       declarations: [
         AppComponent,
         RegularTimerContainerComponent,
         RegularTimerComponent,
-        TodoContainerComponent
+        TodoContainerComponent,
+        TodoItemComponent
       ]
     }).compileComponents();
   }));
