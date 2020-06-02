@@ -4,11 +4,7 @@ import { TodoContainerComponent } from './todo-container.component';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatIconModule } from '@angular/material/icon';
+import { MaterialModule } from '../../shared/material/material.module';
 
 describe('TodoContainerComponent', () => {
   let component: TodoContainerComponent;
@@ -18,11 +14,7 @@ describe('TodoContainerComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        DragDropModule,
-        MatCardModule,
-        MatTabsModule,
-        MatCheckboxModule,
-        MatIconModule
+        MaterialModule
       ],
       declarations: [ TodoContainerComponent, TodoItemComponent ]
     })

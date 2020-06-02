@@ -6,7 +6,7 @@ import { RegularTimerStateEnum } from '../../shared/util/regular/regular-timer-s
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { TimerService } from '../../services/timer/timer.service';
-import { skip, tap } from 'rxjs/operators';
+import { skip } from 'rxjs/operators';
 
 describe('RegularTimerContainerComponent', () => {
   let component: RegularTimerContainerComponent;
