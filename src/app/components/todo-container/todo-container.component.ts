@@ -58,4 +58,10 @@ export class TodoContainerComponent implements OnInit {
   handleDropForDoneItems(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.doneItems, event.previousIndex, event.currentIndex);
   }
+
+  // TODO: Implement modal
+  // TODO: Write test for modal
+  openNewTodoModal() {
+    console.log('openNewTodoModal()');
+  }
 }

@@ -1,19 +1,30 @@
-<mat-tab-group
-  class="todo-view-tab-group"
-  animationDuration="0ms">
-  <mat-tab label="Focus">
-    <ng-container *ngTemplateOutlet="focusPanel"></ng-container>
-  </mat-tab>
-  <mat-tab label="Done">
-    <div cdkDropList (cdkDropListDropped)="handleDropForDoneItems($event)">
-      <div *ngFor="let doneItem of doneItems" cdkDrag>
-        <mat-card>
-          <pomo-todo-item [data]="doneItem"></pomo-todo-item>
-        </mat-card>
+<div class="todo-container">
+  <div class="fab-button-container">
+    <button
+      mat-fab color="primary"
+      aria-label="Create a new todo item"
+      (click)="openNewTodoModal()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <mat-tab-group
+    class="todo-view-tab-group"
+    animationDuration="0ms">
+    <mat-tab label="Focus">
+      <ng-container *ngTemplateOutlet="focusPanel"></ng-container>
+    </mat-tab>
+    <mat-tab label="Done">
+      <div cdkDropList (cdkDropListDropped)="handleDropForDoneItems($event)">
+        <div *ngFor="let doneItem of doneItems" cdkDrag>
+          <mat-card>
+            <pomo-todo-item [data]="doneItem"></pomo-todo-item>
+          </mat-card>
+        </div>
       </div>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+    </mat-tab>
+  </mat-tab-group>
+</div>
 
 <ng-template #focusPanel>
   <div class="focus-container">

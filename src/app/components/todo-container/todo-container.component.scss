@@ -20,6 +20,18 @@ mat-tab-group.todo-view-tab-group {
   }
 }
 
+.todo-container {
+  position: relative;
+
+  padding: 20px 0;
+
+  .fab-button-container {
+    position: absolute;
+    top: -30px;
+    right: 0;
+  }
+}
+
 .focus-container {
   display: flex;
   justify-content: space-between;
