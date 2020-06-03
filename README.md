@@ -46,6 +46,13 @@ Playing around with Angular concepts, whilst seeking to learn best practices
 
 * [#7] - Tutorial 
     * Step by step "How to use" guide to show users how the application works 
+    
+* [#8] - Zen Mode 
+    * By default, the navigation bar can contain links in terms of 
+        * what the Pomodoro technique is 
+        * what the application does 
+        * how it can be used (#7)
+    * A button somewhere in the application can toggle Zen mode, hiding distracting parts of the application, thus enabling the user to focus on just work 
 
 ## Bugs to fix 
 * [FIXED] #1 - State transition 
