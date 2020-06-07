@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { TodoItem } from '../../shared/model/todo-item.model';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { TodoService } from '../../services/todo/todo.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'pomo-todo-container',
@@ -8,40 +10,39 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   styleUrls: ['./todo-container.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class TodoContainerComponent implements OnInit {
-  todoItems: TodoItem[] = [
-    { label: 'Get to work', atIteration: 1, finished: false },
-    {
-      label: 'Pick up groceries',
-      description: 'No chocolate! No chocolate! No chocolate! No chocolate! No chocolate! No chocolate! No chocolate! No chocolate! No chocolate!',
-      atIteration: 1,
-      finished: false
-    },
-    { label: 'Go home', atIteration: 1, finished: false },
-    { label: 'Work on finishing Pomotodo app', atIteration: 2, finished: false },
-    { label: 'Test 1', atIteration: 3, finished: false },
-    { label: 'Test 2', atIteration: 3, finished: false },
-    { label: 'Test 3', atIteration: 3, finished: false }
-  ];
+export class TodoContainerComponent implements OnInit, OnDestroy {
+  subSink: Subscription = new Subscription();
 
-  currentFocusItems: TodoItem[] = [
-    {label: 'Fall asleep', atIteration: 1, finished: false}
-  ];
+  todoItems: TodoItem[] = [];
+  currentFocusItems: TodoItem[] = [];
+  doneItems: TodoItem[] = [];
 
-  doneItems: TodoItem[] = [
-    {label: 'Get up', atIteration: 1, finished: true},
-    {label: 'Brush teeth', atIteration: 1, finished: true},
-    {label: 'Take a shower', atIteration: 1, finished: true},
-    {label: 'Check e-mail', atIteration: 1, finished: true},
-    {label: 'Walk dog', atIteration: 1, finished: true}
-  ];
+  constructor(public todoService: TodoService) {}
 
-  constructor() {}
+  ngOnInit(): void {
+    const todoSubscription = this.todoService.getAllItems()
+      .subscribe(([todoItems, currentFocusItems, doneItems]) => {
+        console.log(todoItems)
+        console.log(currentFocusItems)
+        console.log(doneItems)
+        this.todoItems = todoItems;
+        this.currentFocusItems = currentFocusItems;
+        this.doneItems = doneItems;
+      });
 
-  ngOnInit(): void {}
+    this.subSink.add(todoSubscription);
+
+    setTimeout(() => {
+      this.todoService.addTodoItem({
+        finished: false,
+        atIteration: 1,
+        label: 'Auto generated todo item 1',
+        description: 'Description: Auto generated todo item 1'
+      });
+    }, 3000);
+  }
 
   drop(event: CdkDragDrop<TodoItem[]>) {
-    console.log(event.item.element.nativeElement.innerText);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
@@ -63,5 +64,9 @@ export class TodoContainerComponent implements OnInit {
   // TODO: Write test for modal
   openNewTodoModal() {
     console.log('openNewTodoModal()');
+  }
+
+  ngOnDestroy() {
+    this.subSink.unsubscribe();
   }
 }
