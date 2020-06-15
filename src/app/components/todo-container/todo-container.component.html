@@ -16,11 +16,13 @@
     </mat-tab>
     <mat-tab label="Done">
       <div cdkDropList (cdkDropListDropped)="handleDropForDoneItems($event)">
-        <div *ngFor="let doneItem of doneItems" cdkDrag>
-          <mat-card>
-            <pomo-todo-item [data]="doneItem"></pomo-todo-item>
-          </mat-card>
-        </div>
+        <ng-container *ngIf="doneItems?.length > 0; else emptyListTemplate">
+          <div *ngFor="let doneItem of doneItems" cdkDrag>
+            <mat-card>
+              <pomo-todo-item [data]="doneItem"></pomo-todo-item>
+            </mat-card>
+          </div>
+        </ng-container>
       </div>
     </mat-tab>
   </mat-tab-group>

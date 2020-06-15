@@ -25,7 +25,7 @@ Playing around with Angular concepts, whilst seeking to learn best practices
     * Flow 
         * [DONE] How to transition from "To do" to "Current focus"? 
     * Styling 
-        * Use @font-faces for Montserrat and Open Sans  
+        * Use @font-faces for Montserrat and Open Sans 
         * [FUTURE] - Maybe not use cdn? 
         * Improve scrollbar css if text height exceeds a limit 
     * Dragging and dropping items between columns has to be recorded in the LocalStorage 
@@ -54,6 +54,8 @@ Playing around with Angular concepts, whilst seeking to learn best practices
         * what the application does 
         * how it can be used (#7)
     * A button somewhere in the application can toggle Zen mode, hiding distracting parts of the application, thus enabling the user to focus on just work 
+
+* [#F9] - Cypress e2e testing
 
 ## Bugs to fix 
 * [FIXED] #B1 - State transition 
