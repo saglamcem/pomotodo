@@ -5,10 +5,19 @@
 
   width: 100%;
 
+  .container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+  }
+
   .left {
     display: flex;
     align-items: center;
     width: 80%;
+    height: 100%;
+    min-height: 60px;
 
     .circle {
       width: 30px;
@@ -24,6 +33,9 @@
 
     .content {
       margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       .title {
         font-size: 16px;
@@ -37,4 +49,21 @@
       }
     }
   }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 60px;
+
+    .actions {
+      align-self: center;
+    }
+
+    .icon-tomato {
+      width: 32px;
+      height: 32px;
+    }
+  }
 }
+

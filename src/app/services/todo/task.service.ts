@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
-import { TodoItem } from '../../shared/model/todo-item.model';
+import { TaskItem } from '../../shared/model/task-item.model';
 import { BehaviorSubject, Observable, Subject, combineLatest } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TodoService {
-  todoItems: TodoItem[] = [];
-  currentFocusItems: TodoItem[] = [];
-  doneItems: TodoItem[] = [];
+export class TaskService {
+  todoItems: TaskItem[] = [];
+  currentFocusItems: TaskItem[] = [];
+  doneItems: TaskItem[] = [];
 
-  private _todoItems: Subject<TodoItem[]> = new BehaviorSubject(this.todoItems);
-  private _currentFocusItems: Subject<TodoItem[]> = new BehaviorSubject(this.currentFocusItems);
-  private _doneItems: Subject<TodoItem[]> = new BehaviorSubject(this.doneItems);
+  private _todoItems: Subject<TaskItem[]> = new BehaviorSubject(this.todoItems);
+  private _currentFocusItems: Subject<TaskItem[]> = new BehaviorSubject(this.currentFocusItems);
+  private _doneItems: Subject<TaskItem[]> = new BehaviorSubject(this.doneItems);
 
-  public readonly todoItems$: Observable<TodoItem[]> = this._todoItems.asObservable();
-  public readonly currentFocusItems$: Observable<TodoItem[]> = this._currentFocusItems.asObservable();
-  public readonly doneItems$: Observable<TodoItem[]> = this._doneItems.asObservable();
+  public readonly todoItems$: Observable<TaskItem[]> = this._todoItems.asObservable();
+  public readonly currentFocusItems$: Observable<TaskItem[]> = this._currentFocusItems.asObservable();
+  public readonly doneItems$: Observable<TaskItem[]> = this._doneItems.asObservable();
 
   constructor() {
     const allItems = localStorage.getItem('allItems');
 
-    const allItemsJson: { todo: TodoItem[], focus: TodoItem[], done: TodoItem[] } = allItems
+    const allItemsJson: { todo: TaskItem[], focus: TaskItem[], done: TaskItem[] } = allItems
       ? JSON.parse(allItems)
       : { todo: [], focus: [], done: [] };
 
@@ -40,7 +40,7 @@ export class TodoService {
     ]);
   }
 
-  addTodoItem(newTodoItem: TodoItem) {
+  addTodoItem(newTodoItem: TaskItem) {
     this.setTodoItems([...this.todoItems, newTodoItem]);
 
     const allItemsStringifiedJson = JSON.stringify({
@@ -52,17 +52,17 @@ export class TodoService {
     localStorage.setItem('allItems', allItemsStringifiedJson);
   }
 
-  setTodoItems(todoItems: TodoItem[] = []) {
+  setTodoItems(todoItems: TaskItem[] = []) {
     this.todoItems = todoItems;
     this._todoItems.next(this.todoItems);
   }
 
-  setCurrentFocusItems(currentFocusItems: TodoItem[] = []) {
+  setCurrentFocusItems(currentFocusItems: TaskItem[] = []) {
     this.currentFocusItems = currentFocusItems;
     this._currentFocusItems.next(this.currentFocusItems);
   }
 
-  setDoneItems(doneItems: TodoItem[] = []) {
+  setDoneItems(doneItems: TaskItem[] = []) {
     this.doneItems = doneItems;
     this._doneItems.next(this.doneItems);
   }

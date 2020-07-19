@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TodoContainerComponent } from './todo-container.component';
-import { TodoItemComponent } from '../todo-item/todo-item.component';
+import { TaskContainerComponent } from './task-container.component';
+import { TaskItemComponent } from '../todo-item/task-item.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../../shared/material/material.module';
 
 describe('TodoContainerComponent', () => {
-  let component: TodoContainerComponent;
-  let fixture: ComponentFixture<TodoContainerComponent>;
+  let component: TaskContainerComponent;
+  let fixture: ComponentFixture<TaskContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -16,13 +16,13 @@ describe('TodoContainerComponent', () => {
         BrowserAnimationsModule,
         MaterialModule
       ],
-      declarations: [ TodoContainerComponent, TodoItemComponent ]
+      declarations: [ TaskContainerComponent, TaskItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TodoContainerComponent);
+    fixture = TestBed.createComponent(TaskContainerComponent);
     component = fixture.componentInstance;
     component.ngOnInit();
     fixture.detectChanges();

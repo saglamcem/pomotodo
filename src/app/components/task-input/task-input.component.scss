@@ -1,0 +1,18 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-action-row {
+  display: flex;
+  align-items: center;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons {
+  display: flex;
+}

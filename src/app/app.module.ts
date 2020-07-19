@@ -1,28 +1,35 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MaterialModule } from "./shared/material/material.module";
+import { ReactiveFormsModule } from '@angular/forms';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegularTimerComponent } from './components/regular-timer/regular-timer.component';
-import { TodoContainerComponent } from './components/todo-container/todo-container.component';
-import { MaterialModule } from "./shared/material/material.module";
+import { TaskContainerComponent } from './components/task-container/task-container.component';
 import { RegularTimerContainerComponent } from './components/regular-timer-container/regular-timer-container.component';
-import { TodoItemComponent } from './components/todo-item/todo-item.component';
+import { TaskItemComponent } from './components/todo-item/task-item.component';
+import { TaskInputComponent } from './components/task-input/task-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegularTimerContainerComponent,
     RegularTimerComponent,
-    TodoContainerComponent,
-    TodoItemComponent
+    TaskContainerComponent,
+    TaskItemComponent,
+    TaskInputComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

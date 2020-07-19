@@ -2,9 +2,9 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RegularTimerContainerComponent } from './components/regular-timer-container/regular-timer-container.component';
 import { RegularTimerComponent } from './components/regular-timer/regular-timer.component';
-import { TodoContainerComponent } from './components/todo-container/todo-container.component';
+import { TaskContainerComponent } from './components/task-container/task-container.component';
 import { MaterialModule } from './shared/material/material.module';
-import { TodoItemComponent } from './components/todo-item/todo-item.component';
+import { TaskItemComponent } from './components/todo-item/task-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
@@ -18,8 +18,8 @@ describe('AppComponent', () => {
         AppComponent,
         RegularTimerContainerComponent,
         RegularTimerComponent,
-        TodoContainerComponent,
-        TodoItemComponent
+        TaskContainerComponent,
+        TaskItemComponent
       ]
     }).compileComponents();
   }));
