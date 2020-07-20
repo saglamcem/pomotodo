@@ -1,0 +1,34 @@
+<ng-container *ngIf="data">
+  <div class="task-row">
+    <div class="container">
+      <div class="left">
+        <div class="circle">{{data?.atIteration}}</div>
+        <div class="content">
+          <span class="title">{{data?.label}}</span>
+          <span
+            *ngIf="data?.description"
+            class="description">
+        {{data?.description}}
+      </span>
+        </div>
+      </div>
+      <div class="right">
+        <div class="actions">
+          <mat-checkbox [checked]="data?.finished" (click)="handleSetFinished()"></mat-checkbox>
+        </div>
+        <div class="tomato-count">
+      <span>
+        <img
+          class="icon-tomato"
+          src="assets/tomato.png"
+          alt="The assigned number of pomodoro cycles for this task, indicated by tomatos"
+        >
+      </span>
+          <span>x</span>
+          <span>{{data?.numberOfCycles}}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-container>

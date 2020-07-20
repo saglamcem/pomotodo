@@ -1,0 +1,77 @@
+mat-tab-group.task-view-tab-group {
+  min-width: 75vw;
+  width: 75vw;
+  margin: 0 auto;
+
+  .task-card {
+    margin: 5px 0;
+  }
+
+  mat-tab-header {
+    .mat-tab-label-container {
+      .mat-tab-list {
+        .mat-tab-labels {
+          .mat-tab-label {
+            @extend %task-item-font-styling;
+          }
+        }
+      }
+    }
+  }
+}
+
+.task-container {
+  position: relative;
+
+  padding: 20px 0;
+
+  .fab-button-container {
+    position: absolute;
+    top: -30px;
+    right: 0;
+  }
+}
+
+.focus-container {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+
+  .column-container {
+    flex: 0.49;
+
+    .column-title {
+      margin: 1em 0;
+      font-family: 'Montserrat', "Helvetica Neue", sans-serif !important;
+      font-size: 18px;
+    }
+
+    .item-list {
+      height: 40vh;
+      overflow-y: auto;
+    }
+  }
+}
+
+mat-card {
+  .column-task-item {
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: move;
+
+    @extend %task-item-font-styling;
+
+    &.no-pointer-events {
+      cursor: default;
+    }
+  }
+}
+
+%task-item-font-styling {
+  font-family: 'Montserrat', "Helvetica Neue", sans-serif !important;
+  font-size: 14px;
+  font-weight: 700;
+}

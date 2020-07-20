@@ -20,4 +20,4 @@ workflows:
             branches:
               only:
               - master
-              - /feature/*/
+              - /feature/.*/

@@ -1,8 +1,8 @@
-import { TodoItem } from './todo-item.model';
+import { TaskItem } from './task-item.model';
 
 export class TaskListColumn {
   id: string;
   columnTitle: string;
-  taskList: TodoItem[];
+  taskList: TaskItem[];
   cdkConnectedTo: string[];
 }

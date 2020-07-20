@@ -18,27 +18,47 @@ Playing around with Angular concepts, whilst seeking to learn best practices
 * Better explain what the Pomodoro technique is, and how the application will be used  
     * Add content [from here](https://francescocirillo.com/pages/pomodoro-technique).
 
-### - Features -
+### - Features - 
 
-#### -- Priorities --
-* Language support 
-    * i18n with transloco 
+#### -- Priorities -- 
+* [#F2] - Todo list management 
+    * Flow 
+        * [DONE] How to transition from "To do" to "Current focus"? 
+    * Styling 
+        * Use @font-faces for Montserrat and Open Sans 
+        * [FUTURE] - Maybe not use cdn? 
+        * Improve scrollbar css if text height exceeds a limit 
+    * Dragging and dropping items between columns has to be recorded in the LocalStorage 
 
-* Timer recovery 
-    * Remember where the counter was and continue from there in case of refresh 
+* [#F3] - Timer recovery 
+    * Remember where the counter was and continue from there in case of refresh  
     * LocalStorage is a possible solution 
-
-* Update browser title on timer state/seconds count change 
-    * PWA & Service workers 
     
-* Accessibility 
-    * Aria tags, to start with the least. Go for Medium articles and official Angular documentation.
+* [#F4] - Update browser title on timer state/seconds count change 
+    * PWA & Service workers 
 
 #### -- Future Versions -- 
-* Tutorial
+* [#F5] - Language support 
+    * i18n with transloco 
+    * [See here](https://ngneat.github.io/transloco/)  
+
+* [#F6] - Accessibility 
+    * Aria tags, to start with the least. Go for Medium articles and official Angular documentation. 
+
+* [#F7] - Tutorial 
     * Step by step "How to use" guide to show users how the application works 
+    
+* [#F8] - Zen Mode 
+    * By default, the navigation bar can contain links in terms of 
+        * what the Pomodoro technique is 
+        * what the application does 
+        * how it can be used (#7)
+    * A button somewhere in the application can toggle Zen mode, hiding distracting parts of the application, thus enabling the user to focus on just work 
+
+* [#F9] - Cypress e2e testing
 
 ## Bugs to fix 
-* [FIXED] #1 - State transition
-    * Start -> pause -> done (now in counting state)
+* [FIXED] #B1 - State transition 
+    * Start -> pause -> done (now in counting state) 
     * If we click pause now, the PAUSED state shows a red background, and we can see DONE (instead of SKIP) 
+* #

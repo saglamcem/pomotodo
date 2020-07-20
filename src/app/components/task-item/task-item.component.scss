@@ -1,0 +1,70 @@
+.task-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    min-height: 60px;
+
+    .circle {
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
+      border-radius: 50%;
+      font-size: 18px;
+      color: #fff;
+      line-height: 30px;
+      text-align: center;
+      background: red;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      margin-left: 20px;
+
+      .title {
+        font-size: 16px;
+      }
+
+      .description {
+        display: block;
+        margin-top: 5px;
+        font-family: 'Montserrat', "Helvetica Neue", sans-serif;
+        color: #555;
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 60px;
+
+    .actions {
+      align-self: center;
+    }
+
+    .icon-tomato {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
