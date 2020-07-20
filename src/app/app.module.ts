@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegularTimerComponent } from './components/regular-timer/regular-timer.component';
 import { TaskContainerComponent } from './components/task-container/task-container.component';
 import { RegularTimerContainerComponent } from './components/regular-timer-container/regular-timer-container.component';
-import { TaskItemComponent } from './components/todo-item/task-item.component';
+import { TaskItemComponent } from './components/task-item/task-item.component';
 import { TaskInputComponent } from './components/task-input/task-input.component';
 
 @NgModule({

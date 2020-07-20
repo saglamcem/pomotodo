@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { TaskItem } from '../../shared/model/task-item.model';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { TaskService } from '../../services/todo/task.service';
+import { TaskService } from '../../services/task/task.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { Subscription } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -30,25 +30,15 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const taskSubscription = this.taskService.getAllItems()
       .subscribe(([todoItems, currentFocusItems, doneItems]) => {
-        console.log(todoItems)
-        console.log(currentFocusItems)
-        console.log(doneItems)
+        console.log(todoItems);
+        console.log(currentFocusItems);
+        console.log(doneItems);
         this.todoItems = todoItems;
         this.currentFocusItems = currentFocusItems;
         this.doneItems = doneItems;
       });
 
     this.subSink.add(taskSubscription);
-
-    // setTimeout(() => {
-    //   this.taskService.addTodoItem({
-    //     finished: false,
-    //     numberOfCycles: 1,
-    //     atIteration: 1,
-    //     label: 'Auto generated todo item 1',
-    //     description: 'Description: Auto generated todo item 1'
-    //   });
-    // }, 3000);
   }
 
   drop(event: CdkDragDrop<TaskItem[]>) {
@@ -122,19 +112,16 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     moveItemInArray(this.doneItems, event.previousIndex, event.currentIndex);
   }
 
-  // TODO: Implement modal
   // TODO: Write test for modal
-  openNewTodoModal() {
-    console.log('openNewTodoModal()');
+  openNewTaskModal() {
     this.modalService.openTaskInputModal()
       .afterClosed()
       .subscribe(newTask => {
-        console.log('after closed: ', newTask);
         if (newTask) {
           const newTaskWithId: TaskItem = {
             ...newTask,
             id: uuidv4()
-          }
+          };
           this.taskService.addTodoItem(newTaskWithId);
         }
       });

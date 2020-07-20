@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TaskContainerComponent } from './task-container.component';
-import { TaskItemComponent } from '../todo-item/task-item.component';
+import { TaskItemComponent } from '../task-item/task-item.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../../shared/material/material.module';

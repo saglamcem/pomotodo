@@ -4,7 +4,7 @@ import { RegularTimerContainerComponent } from './components/regular-timer-conta
 import { RegularTimerComponent } from './components/regular-timer/regular-timer.component';
 import { TaskContainerComponent } from './components/task-container/task-container.component';
 import { MaterialModule } from './shared/material/material.module';
-import { TaskItemComponent } from './components/todo-item/task-item.component';
+import { TaskItemComponent } from './components/task-item/task-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {

@@ -1,9 +1,9 @@
-mat-tab-group.todo-view-tab-group {
+mat-tab-group.task-view-tab-group {
   min-width: 75vw;
   width: 75vw;
   margin: 0 auto;
 
-  .todo-card {
+  .task-card {
     margin: 5px 0;
   }
 
@@ -20,7 +20,7 @@ mat-tab-group.todo-view-tab-group {
   }
 }
 
-.todo-container {
+.task-container {
   position: relative;
 
   padding: 20px 0;
