@@ -19,7 +19,7 @@
         <ng-container *ngIf="doneItems?.length > 0; else emptyListTemplate">
           <div *ngFor="let doneItem of doneItems" cdkDrag>
             <mat-card>
-              <pomo-task-item [data]="doneItem"></pomo-task-item>
+              <pomo-task-item [data]="doneItem" (setFinished$)="setFinishedForTaskItem(TaskListType.DONE, $event)"></pomo-task-item>
             </mat-card>
           </div>
         </ng-container>
@@ -43,7 +43,7 @@
         <ng-container *ngIf="todoItems?.length > 0; else emptyListTemplate">
           <div *ngFor="let todoItem of todoItems" cdkDrag>
             <mat-card>
-              <pomo-task-item [data]="todoItem"></pomo-task-item>
+              <pomo-task-item [data]="todoItem" (setFinished$)="setFinishedForTaskItem(TaskListType.TODO, $event)"></pomo-task-item>
             </mat-card>
           </div>
         </ng-container>
@@ -63,7 +63,7 @@
         <ng-container *ngIf="currentFocusItems?.length > 0; else emptyListTemplate">
           <div *ngFor="let focusItem of currentFocusItems" cdkDrag>
             <mat-card>
-              <pomo-task-item [data]="focusItem"></pomo-task-item>
+              <pomo-task-item [data]="focusItem" (setFinished$)="setFinishedForTaskItem(TaskListType.FOCUS, $event)"></pomo-task-item>
             </mat-card>
           </div>
         </ng-container>

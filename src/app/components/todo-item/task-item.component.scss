@@ -32,10 +32,11 @@
     }
 
     .content {
-      margin-left: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
+      margin-left: 20px;
 
       .title {
         font-size: 16px;

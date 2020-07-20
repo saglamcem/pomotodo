@@ -4,7 +4,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { TaskService } from '../../services/todo/task.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { v4 as uuidv4 } from 'uuid';
+import { TaskListType } from '../../shared/model/task-list-type.enum';
 
 @Component({
   selector: 'pomo-task-container',
@@ -18,6 +19,8 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   todoItems: TaskItem[] = [];
   currentFocusItems: TaskItem[] = [];
   doneItems: TaskItem[] = [];
+
+  TaskListType = TaskListType;
 
   constructor(
     private readonly taskService: TaskService,
@@ -62,6 +65,59 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
     }
   }
 
+  setFinishedForTaskItem(sourceTaskType: TaskListType, taskId: string) {
+    const todoItems: TaskItem[] = [...this.todoItems];
+    const currentFocusItems: TaskItem[] = [...this.currentFocusItems];
+    const doneItems: TaskItem[] = [...this.doneItems];
+
+    let indexToRemove = null;
+
+    if (sourceTaskType === TaskListType.TODO) {
+      indexToRemove = todoItems.findIndex(task => task?.id === taskId);
+    }
+    else if (sourceTaskType === TaskListType.FOCUS) {
+      indexToRemove = currentFocusItems.findIndex(task => task?.id === taskId);
+    }
+    else if (sourceTaskType === TaskListType.DONE) {
+      indexToRemove = doneItems.findIndex(task => task?.id === taskId);
+    }
+
+    if (indexToRemove === -1) return;
+
+    let itemToMove: TaskItem = null;
+
+    if (sourceTaskType === TaskListType.TODO) {
+      itemToMove = todoItems[indexToRemove];
+      todoItems.splice(indexToRemove, 1);
+
+      itemToMove.finished = !itemToMove.finished;
+      doneItems.push(itemToMove);
+
+      this.taskService.setTodoItems(todoItems);
+      this.taskService.setDoneItems(doneItems);
+    }
+    else if (sourceTaskType === TaskListType.FOCUS) {
+      itemToMove = currentFocusItems[indexToRemove];
+      currentFocusItems.splice(indexToRemove, 1);
+
+      itemToMove.finished = !itemToMove.finished;
+      doneItems.push(itemToMove);
+
+      this.taskService.setCurrentFocusItems(currentFocusItems);
+      this.taskService.setDoneItems(doneItems);
+    }
+    else if (sourceTaskType === TaskListType.DONE) {
+      itemToMove = doneItems[indexToRemove];
+      doneItems.splice(indexToRemove, 1);
+
+      itemToMove.finished = !itemToMove.finished;
+      todoItems.push(itemToMove);
+
+      this.taskService.setTodoItems(todoItems);
+      this.taskService.setDoneItems(doneItems);
+    }
+  }
+
   handleDropForDoneItems(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.doneItems, event.previousIndex, event.currentIndex);
   }
@@ -75,7 +131,11 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
       .subscribe(newTask => {
         console.log('after closed: ', newTask);
         if (newTask) {
-          this.taskService.addTodoItem(newTask);
+          const newTaskWithId: TaskItem = {
+            ...newTask,
+            id: uuidv4()
+          }
+          this.taskService.addTodoItem(newTaskWithId);
         }
       });
   }

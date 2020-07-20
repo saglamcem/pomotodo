@@ -14,7 +14,7 @@
       </div>
       <div class="right">
         <div class="actions">
-          <mat-checkbox [checked]="data?.finished"></mat-checkbox>
+          <mat-checkbox [checked]="data?.finished" (click)="handleSetFinished()"></mat-checkbox>
         </div>
         <div class="tomato-count">
       <span>
