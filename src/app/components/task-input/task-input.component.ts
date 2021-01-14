@@ -18,8 +18,8 @@ export class TaskInputComponent implements OnInit {
   });
 
   constructor(
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<TaskInputComponent>,
+    private readonly fb: FormBuilder,
+    public readonly dialogRef: MatDialogRef<TaskInputComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TaskItem
   ) {}
 
